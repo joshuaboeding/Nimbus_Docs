@@ -26,7 +26,7 @@ Primary method for users to segment and filter data without running formal repor
 
 ## 3. UI Optimization: Compact Layouts
 
-Controls the "glance-to-value" ratio of a record.
+Controls the glance-to-value ratio of a record.
 
 - **Highlights Panel:** Compact Layout controls the top banner of a Lightning
   Record Page — first field listed becomes the bold headline
@@ -57,96 +57,175 @@ Two separate engines for building record pages.
 - Different layouts assignable based on intersection of App + Record Type +
   User Profile
 
-## 5. Tethered Wealth Applications
+## 5. Tethered Wealth Applications — Lightning Customization
 
 **Lightning App Architecture**
 Custom "Tethered Wealth Dashboard" app built via App Manager. Branded with
-charcoal hex (`#333333`). Navigation limited to: Home, Contacts, Financial
+charcoal hex (#333333). Navigation limited to: Home, Contacts, Financial
 Assets, Chatter. All irrelevant tabs removed.
 
 **List View Engineering**
-`Financial_Asset__c` list view "High Value Global Assets" — filter logic:
-Asset Value > $100,000 AND Country ≠ USA. Donut chart attached summing total
-asset value grouped by Country — instant portfolio visualization before
-opening any record.
+Financial_Asset__c list view "High Value Global Assets" — filter logic:
+Asset Value > $100,000 AND Country not equal to USA. Donut chart attached
+summing total asset value grouped by Country — instant portfolio visualization
+before opening any record.
 
 **Compact Layout Implementation**
-`Financial_Asset__c` compact layout surfaces `Asset_Value`, `Asset_Type`, and
-`Country_of_Residence` at the top of every record. Mobile-first — advisor
-sees the three critical fields immediately on the Salesforce Mobile App during
+Financial_Asset__c compact layout surfaces Asset_Value, Asset_Type, and
+Country_of_Residence at the top of every record. Mobile-first — advisor sees
+the three critical fields immediately on the Salesforce Mobile App during
 client meetings.
 
 **Dynamic Forms & Lightning App Builder**
 Client Record page upgraded to Dynamic Forms. Custom "Tax & Compliance"
-section created at top of page. `Foreign_Tax_ID__c` field visible for
+section created at top of page. Foreign_Tax_ID__c field visible for
 international clients, hidden for domestic clients — keeps UI clean per
 client type.
 
 **Page Layout Editor — Related Lists**
-`Files` related list added to `Financial_Asset__c` layout via Page Layout
-Editor. Ensures immediate access to PDF tax returns and wire transfer receipts
+Files related list added to Financial_Asset__c layout via Page Layout Editor.
+Ensures immediate access to PDF tax returns and wire transfer receipts
 directly from the asset record.
 
-Here are your clean, formatted notes ready to be pasted directly into VS Code and then synced to your GitHub and Notion.
+---
 
-Salesforce Customization: Buttons, Links, and Quick Actions
-1. Custom Buttons and Links
-Custom buttons and links integrate Salesforce data with external URLs, applications, or intranets. They can include Salesforce fields as "tokens" (merge fields) within the URL to pass data automatically (e.g., passing a client's zip code into Google Maps).
+## 6. Custom Buttons, Links, and Quick Actions
 
-Three Primary Types:
-List Button: Appears on a related list on an object record page. (e.g., A button on the "Energy Audits" related list).
+### Custom Buttons and Links
 
-Detail Page Link: Appears in the "Links" section of the record details on an object record page. (Note: Only supported on record pages that don't use Dynamic Forms).
+Custom buttons and links integrate Salesforce data with external URLs,
+applications, or intranets. Salesforce fields can be passed as merge fields
+into URLs to transfer data automatically.
 
-Detail Page Button: Appears in the action menu in the highlights panel at the top of a record page.
+**Three Primary Types**
 
-Configuration Steps:
+- **List Button** — appears on a related list on an object record page
+- **Detail Page Link** — appears in the Links section of record details.
+  Note: only supported on record pages that do not use Dynamic Forms
+- **Detail Page Button** — appears in the action menu in the highlights panel
+  at the top of a record page
 
-Navigate to Object Manager -> Select Object -> Buttons, Links, and Actions.
+**Configuration Steps**
+- Navigate to Object Manager, select the object, then Buttons, Links, and Actions
+- Define the URL using the formula editor and merge fields
+- Add the button or link to the object's Page Layout
 
-Define the URL using the formula editor and merge fields.
+### Quick Actions
 
-Add the button/link to the Object's Page Layout.
+Allow users to perform tasks (create records, log calls, send emails) with
+minimal clicks and without navigating away from their current workspace.
 
-2. Quick Actions
-Actions allow users to quickly perform tasks (create records, log calls, send emails) with minimal clicks and without navigating away from their current workspace.
+**Object-Specific Actions**
+- Automatic relationship to other records — a Contact created from an Account
+  action is automatically linked to that Account
+- Live on the specific object's page layout
+- Types: Create a Record, Update a Record, Log a Call, Send Email, Custom
+- Use the Action Layout Editor to define exactly which fields appear in the
+  pop-up — keeps it clean and uncluttered
 
-Object-Specific Actions
-The Core Trait: They have an automatic relationship to other records. If you create a Contact from an Account using an object-specific action, the new Contact is automatically linked to that Account.
+**Global Actions**
+- No automatic relationship to a specific record — parent must be linked manually
+- Accessible from anywhere via the Salesforce header (+ icon)
+- Created in Setup under Global Actions, added to Publisher Layouts
 
-Location: They live on the specific object's page layout.
+**Page Layout Integration**
+- Drag actions from the Mobile & Lightning Actions category in the palette
+- Drop into the Salesforce Mobile and Lightning Experience Actions section
+- May need to click the wrench icon to override defaults first
 
-Types: Create a Record, Update a Record, Log a Call, Custom (Visualforce/Lightning Components), Send Email.
+### Tethered Wealth Applications — Buttons and Actions
 
-Layout Editor: After creating the action, you use the Action Layout Editor to define exactly which fields the user needs to fill out (keeping it clean and uncluttered).
+**List Button — Compliance**
+Button on the Financial Accounts related list linking directly to IRS PDF
+guidelines for FBAR reporting.
 
-Global Actions
-The Core Trait: They have no automatic relationship to a specific record. Someone has to manually link the new record to a parent if necessary.
+**Detail Page Link — Due Diligence**
+Custom link on the Contact page passing Contact.FirstName and Contact.LastName
+into the FINRA BrokerCheck search URL for instant credential verification.
 
-Location: They live in the Salesforce Header (the + icon) and are accessible from anywhere in the system.
+**Detail Page Button — External Portfolio**
+Button passing Account.AccountNumber into the URL of Orion or Black Diamond
+portfolio management software — opens the client performance dashboard in a
+new tab instantly.
 
-Configuration: Created in Setup under Global Actions, and then added to the Publisher Layouts (not the Object Manager).
+**Object-Specific Action — Log Discovery Call**
+Placed on the Account (Household) record. Three-field pop-up: Notes, Action
+Items, Next Meeting Date. Automatically attaches to the Household. No
+navigation required.
 
-3. Page Layout Integration
-To make actions visible in the modern UI, they must be added to a specific section of the page layout.
+**Object-Specific Action — Add Foreign Asset**
+Create a Record action on the Account showing only the fields needed for an
+expat asset: Currency Type, Country of Origin, Value.
 
-Drag actions from the "Mobile & Lightning Actions" category in the palette.
+**Global Action — Quick Prospect**
+Available in the top header from anywhere in the system. Captures Prospect
+name, email, and country of residence without navigating away from the
+current screen.
 
-Drop them into the "Salesforce Mobile and Lightning Experience Actions" section of the page layout (you may need to click the wrench icon to override the defaults first).
+---
 
-🏦 Application for Tethered Wealth (Boutique Advisory)
-To make the Salesforce UI incredibly efficient for an advisor managing expat portfolios, these tools can be configured to eliminate data entry friction and connect to external financial tools.
+## 7. User Engagement & Prompts
 
-Buttons & Links for Wealth Management
-List Button (Compliance): A button on the "Financial Accounts" related list that points directly to the IRS PDF guidelines for FBAR reporting.
+### Core Philosophy
 
-Detail Page Link (Due Diligence): A custom link on the Contact page that passes the {!Contact.FirstName} and {!Contact.LastName} into the FINRA BrokerCheck search URL to quickly verify credentials or history.
+The goal of user engagement is to deliver the "Aha!" moment — the exact second
+a user realizes a tool makes their job easier. Good engagement gives users
+actionable, relevant information without interrupting their workflow unnecessarily.
 
-Detail Page Button (External Portfolio): A button that passes the client's {!Account.AccountNumber} into the URL of Orion or Black Diamond (portfolio management software) to instantly open their performance dashboard in a new tab.
+**The Four Key Scenarios**
+- **Onboarding** — guiding users where to begin, highlighting what is new
+- **Feature Discovery & Adoption** — nudging users toward unused features
+- **Troubleshooting Help** — providing just-in-time assistance when stuck
+- **Deeper Learning** — offering advanced training for complex tasks
 
-Quick Actions for Advisor Workflows
-Object-Specific Action ("Log Discovery Call"): Placed on the Account (Household) record. When the advisor finishes a call, clicking this opens a clean, 3-field pop-up: Notes, Action Items, and Next Meeting Date. It automatically attaches to the Household, saving time and keeping the UI uncluttered.
+**Push vs. Pull Delivery**
+- **Push** — system shows it automatically (pop-up prompt, empty state message).
+  Use when users would not know to look for help.
+- **Pull** — user requests it (hovering over an info icon, clicking Help menu).
+  Use when users are motivated to seek answers.
 
-Object-Specific Action ("Add Foreign Asset"): A "Create a Record" action on the Account that only shows the specific fields needed for an expat asset (Currency Type, Country of Origin, Value).
+### Prompts vs. Walkthroughs
 
-Global Action ("Quick Prospect"): Placed in the top header. If the advisor is reviewing a complex tax document and gets a phone call from a new lead, they can click the Global Action to capture the Prospect's name, email, and country of residence without navigating away from the tax document they were currently studying.
+- **Prompt** — a single small window. Best for short messages or a single
+  call-to-action.
+- **Walkthrough** — a connected series of prompts. Best for step-by-step
+  multi-page processes.
+
+**The Three Prompt Types**
+
+- **Floating** — non-intrusive, placeable in 9 screen positions. Best for
+  short messages (e.g., "Check out this new list view").
+- **Targeted** — visually points to a specific field or button on the page.
+  Best for highlighting a new custom button or required field.
+- **Docked** — stays pinned to the bottom right while the user clicks around.
+  Supports embedded video. Best for step-by-step guides where the user needs
+  to read instructions while actively working through the screen.
+
+### Design Frameworks
+
+**M.A.P. (Message, Audience, Purpose)**
+- **Message** — exactly what you are telling the user
+- **Audience** — all users, admins only, new hires only, etc.
+- **Purpose** — what behavior are you trying to change
+
+**F.A.C.E. Principles**
+Keep all prompt text: Friendly, Accurate, Concise, Educational
+
+### Tethered Wealth Applications — User Engagement
+
+**Targeted Prompt — Compliance**
+New Requires_FBAR_Reporting__c checkbox added to the Expat Contact page.
+Targeted Prompt points directly at the checkbox on first load.
+Message: "If your client holds over $10k in foreign accounts, check this box
+to trigger the automated CPA alert workflow."
+
+**Docked Prompt — Live Discovery Call Script**
+Advisor is on a live call with a new expat prospect. He clicks a button to
+open a Docked Prompt containing 5 key Expat Tax Discovery Questions. Because
+it stays pinned, he reads the questions aloud while simultaneously entering
+the client's answers into Salesforce fields on the rest of the screen.
+
+**Floating Prompt — Feature Adoption**
+New Kanban view built for "Expats in Onboarding" pipeline. Floating Prompt
+appears on next login: "Tired of lists? View your pipeline as a visual
+Kanban board." One click drives adoption without any training session required.
