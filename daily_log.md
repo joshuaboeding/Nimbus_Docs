@@ -55,3 +55,54 @@ Day 1: Salesforce Admin Beginner and Excel Navigation
 - Continue Salesforce Admin cert modules
 - Excel Week 1 continuation
 - Wharton next module
+
+## Day 4 — April 23, 2026
+
+### What I completed
+
+**Salesforce Admin**
+- Reports and Dashboards module
+
+**Wharton Corporate Finance**
+- Module 05: Inflation
+- Module 06: Interest rates, APR and EAR
+- Module 07: Term structure and yield curve
+
+### Key concepts
+Wharton Finance Theory: * Real vs. Nominal Returns: Mastered the Fisher Equation; inflation affects consumption, not nominal dollar growth.
+
+APR vs. EAR: APR is a quoting convention (ignores compounding); EAR is the actual mathematical discount rate used for calculating PV/FV.
+
+Term Structure & Yield Curves: Interest rates are not constant; they vary by maturity (time) and credit rating (risk).
+Salesforce Reports & Dashboards
+1. Report Formats (The Data Shapes)
+
+Tabular: A simple list of records with no sub-totals (like a basic Excel spreadsheet). Best for data exports or simple mailing lists.
+
+Summary: Groups data by rows (e.g., Grouping Tethered Wealth clients by "Country of Residence"). This is the most common format and is required to create most dashboard charts.
+
+Matrix: Groups data by both rows and columns (e.g., Grouping by "Country of Residence" down the side, and "Advisory Tier" across the top). Used for complex, two-dimensional comparisons.
+
+A dashboard component is just a visual representation of a source report.
+
+Static (Specified User): The dashboard runs as a specific person (e.g., the CEO). Everyone who views the dashboard sees exactly what the CEO sees, regardless of their own security settings.
+
+Dynamic (Logged-in User): The dashboard runs as the person viewing it. Two different junior advisors looking at the same dashboard will see different numbers based on which client records they personally own.
+Advanced Filtering & Math
+
+Cross Filters: Allows you to filter parent records based on child records (e.g., Show me all "Accounts" WITH "Opportunities" closing this year, or Accounts WITHOUT "Activities" in the last 90 days).
+### Open questions
+-Formula Limitations: What is the technical difference between a "Row-Level Formula" and a "Custom Summary Formula" in a report, and what are the limitations of each?
+
+Visibility Troubleshooting: If a Tethered Wealth advisor complains that a specific column (e.g., "Total Net Worth") is missing from their report, but I know the field is on the report layout, what are the three security settings I need to check to figure out why it is hidden from them?
+
+Custom Report Types: Standard report types only show "WITH" relationships (e.g., Accounts WITH Contacts). If I need a report showing Accounts with or without Contacts, how exactly do I configure a Custom Report Type to achieve that?
+
+Dashboard Limits: What is the maximum number of components allowed on a single standard Salesforce dashboard, and how do I work around that limit if the executive team demands more metrics on a single screen?
+
+Data Snapshots: Reports only show real-time data. How do I configure a "Reporting Snapshot" in Salesforce to capture historical data (e.g., what our pipeline looked like on the 1st of every month) for month-over-month trend analysis?
+
+### Tomorrow
+- The Excel Gatekeepers: Pivot Excel practice away from generic Coursera assignments and toward mastering XLOOKUPs and PivotTables using synthetic Tethered Wealth data.
+
+The Tech Block: Continue Salesforce Admin prep (Trailhead) and hands-on org configuration to maintain momentum toward the Month 3 certification target.
