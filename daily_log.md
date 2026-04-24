@@ -106,3 +106,9 @@ Data Snapshots: Reports only show real-time data. How do I configure a "Reportin
 - The Excel Gatekeepers: Pivot Excel practice away from generic Coursera assignments and toward mastering XLOOKUPs and PivotTables using synthetic Tethered Wealth data.
 
 The Tech Block: Continue Salesforce Admin prep (Trailhead) and hands-on org configuration to maintain momentum toward the Month 3 certification target.
+
+Day 05 - April 24, 2026
+Morning Block: System Architecture & UI Troubleshooting
+The session began with clarifying the critical database distinction between an Object (the structural blueprint) and a Record (the individual data instances). Using Marcus Aurelius as the test case, three specific financial account records were instantiated (Brokerage, 401k, HSA) using the single Financial Account object.
+
+Significant time was spent optimizing the user interface and battling "Salesforce Ghost Stories" (metadata caching). Successfully navigated the Lightning App Builder, removed legacy fields from the canvas, and executed hard refreshes to align the live environment with the backend database. The system now effectively prevents manual "fudging" of net worth by relying entirely on the automated Roll-up Summary.
